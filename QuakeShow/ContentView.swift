@@ -12,18 +12,17 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \QuakeItem.detail, ascending: true)],
         animation: .default)
-    private var items: FetchedResults<Item>
-
+    private var quakes: FetchedResults<QuakeItem>
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+                ForEach(quakes) { quake in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text(quake.detail ?? "none")
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text(quake.detail ?? "none")
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -44,8 +43,8 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = QuakeItem(context: viewContext)
+            newItem.detail = "Mommy"
 
             do {
                 try viewContext.save()
@@ -60,7 +59,7 @@ struct ContentView: View {
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            offsets.map { quakes[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()

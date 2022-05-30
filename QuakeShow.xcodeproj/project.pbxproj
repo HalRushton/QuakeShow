@@ -16,6 +16,8 @@
 		18CE296628452C8400BB7BFC /* QuakeShowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE296528452C8400BB7BFC /* QuakeShowTests.swift */; };
 		18CE297028452C8400BB7BFC /* QuakeShowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE296F28452C8400BB7BFC /* QuakeShowUITests.swift */; };
 		18CE297228452C8400BB7BFC /* QuakeShowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE297128452C8400BB7BFC /* QuakeShowUITestsLaunchTests.swift */; };
+		18CE297F28452CEE00BB7BFC /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE297E28452CEE00BB7BFC /* Feature.swift */; };
+		18CE298128452D0C00BB7BFC /* UerKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE298028452D0C00BB7BFC /* UerKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		18CE296B28452C8400BB7BFC /* QuakeShowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuakeShowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18CE296F28452C8400BB7BFC /* QuakeShowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeShowUITests.swift; sourceTree = "<group>"; };
 		18CE297128452C8400BB7BFC /* QuakeShowUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuakeShowUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		18CE297E28452CEE00BB7BFC /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
+		18CE298028452D0C00BB7BFC /* UerKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UerKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				18CE295828452C8300BB7BFC /* Persistence.swift */,
 				18CE295A28452C8300BB7BFC /* QuakeShow.xcdatamodeld */,
 				18CE295528452C8300BB7BFC /* Preview Content */,
+				18CE297E28452CEE00BB7BFC /* Feature.swift */,
+				18CE298028452D0C00BB7BFC /* UerKey.swift */,
 			);
 			path = QuakeShow;
 			sourceTree = "<group>";
@@ -263,8 +269,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CE298128452D0C00BB7BFC /* UerKey.swift in Sources */,
 				18CE295928452C8300BB7BFC /* Persistence.swift in Sources */,
 				18CE295228452C8200BB7BFC /* ContentView.swift in Sources */,
+				18CE297F28452CEE00BB7BFC /* Feature.swift in Sources */,
 				18CE295C28452C8300BB7BFC /* QuakeShow.xcdatamodeld in Sources */,
 				18CE295028452C8200BB7BFC /* QuakeShowApp.swift in Sources */,
 			);

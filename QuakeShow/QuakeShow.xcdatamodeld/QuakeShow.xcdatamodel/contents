@@ -1,9 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FeaturePropertiesItem" representedClassName="FeaturePropertiesItem" syncable="YES" codeGenerationType="class">
+        <attribute name="alert" optional="YES" attributeType="String"/>
+        <attribute name="cdi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="detail" optional="YES" attributeType="String"/>
+        <attribute name="dmin" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="felt" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gap" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ids" optional="YES" attributeType="String"/>
+        <attribute name="mag" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="magType" optional="YES" attributeType="String"/>
+        <attribute name="mmi" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="net" optional="YES" attributeType="String"/>
+        <attribute name="nst" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="place" optional="YES" attributeType="String"/>
+        <attribute name="rms" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sig" optional="YES" attributeType="String"/>
+        <attribute name="sources" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tsunami" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="types" optional="YES" attributeType="String"/>
+        <attribute name="tz" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="quake" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeItem" inverseName="features" inverseEntity="QuakeItem"/>
+    </entity>
+    <entity name="QuakeCoordinatesItem" representedClassName="QuakeCoordinatesItem" syncable="YES" codeGenerationType="class">
+        <attribute name="depth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="quake" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeItem" inverseName="coordinates" inverseEntity="QuakeItem"/>
+    </entity>
+    <entity name="QuakeItem" representedClassName="QuakeItem" syncable="YES" codeGenerationType="class">
+        <attribute name="detail" optional="YES" attributeType="String"/>
+        <attribute name="magnitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="place" optional="YES" attributeType="String"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tz" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="coordinates" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="QuakeCoordinatesItem" inverseName="quake" inverseEntity="QuakeCoordinatesItem"/>
+        <relationship name="features" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeaturePropertiesItem" inverseName="quake" inverseEntity="FeaturePropertiesItem"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="QuakeCoordinatesItem" positionX="-988.0542602539062" positionY="-1607.965362548828" width="128" height="89"/>
+        <element name="FeaturePropertiesItem" positionX="-1149.335815429688" positionY="-1613.861175537109" width="128" height="419"/>
+        <element name="QuakeItem" positionX="-1078.543395996094" positionY="-1694.551605224609" width="128" height="134"/>
     </elements>
 </model>
