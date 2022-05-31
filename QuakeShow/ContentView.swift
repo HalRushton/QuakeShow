@@ -10,50 +10,46 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    @State var searchText: String = ""
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \QuakeItem.detail, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \QuakeItem.title, ascending: true)],
         animation: .default)
+    
     private var quakes: FetchedResults<QuakeItem>
     var body: some View {
         NavigationView {
             List {
-                ForEach(quakes) { quake in
+                ForEach(searchResults) { quake in
                     NavigationLink {
-                        Text(quake.detail ?? "none")
+                        Text(quake.title ?? "none")
                     } label: {
-                        Text(quake.detail ?? "none")
+                        Text(quake.title ?? "none")
                     }
                 }
                 .onDelete(perform: deleteItems)
             }
+            .listStyle(.plain)
+            .searchable(text: $searchText)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    NavigationLink(destination: {
+                        DeveloperSettingsView()
+                    }, label: {
+                        Image(systemName: "gear")
+                    })
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                    NavigationLink(destination: {
+                        Text("sort me")
+                    }, label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    })
                 }
             }
+
             Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = QuakeItem(context: viewContext)
-            newItem.detail = "Mommy"
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
         }
     }
 
@@ -64,21 +60,20 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                print("error \(error) in saving context while deleting")
+                assert(true, "could not save the context while deleting")
             }
         }
     }
+     
+    var searchResults: [QuakeItem] {
+        if searchText.isEmpty {
+            return quakes.map { $0 }
+        } else {
+            return quakes.filter { $0.title?.contains(searchText) == true }
+        }
+    }
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

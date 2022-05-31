@@ -13,9 +13,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        for index in 0..<10 {
             let newItem = QuakeItem(context: viewContext)
-            newItem.detail = "Hello"
+            newItem.title = "Quake \(index)"
         }
         do {
             try viewContext.save()
@@ -52,5 +52,9 @@ struct PersistenceController {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func clearContent() {
+        
     }
 }
