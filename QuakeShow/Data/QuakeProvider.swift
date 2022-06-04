@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import Combine
 
+// TODO add more fetch parameters
 class QuakeProvider: NSObject, ObservableObject {
     var quakes = CurrentValueSubject<[QuakeItem], Never>([])
     private let quakeFetchController: NSFetchedResultsController<QuakeItem>
@@ -16,7 +17,7 @@ class QuakeProvider: NSObject, ObservableObject {
     
     private override init() {
         let fetchRequest = QuakeItem.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "time", ascending: false)]
         quakeFetchController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: PersistenceController.shared.container.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         super.init()
@@ -26,7 +27,7 @@ class QuakeProvider: NSObject, ObservableObject {
             try quakeFetchController.performFetch()
             quakes.value = quakeFetchController.fetchedObjects ?? []
         } catch {
-            assert(true, "could not fetch objects")
+            assertionFailure("could not fetch objects")
         }
     }
 }
@@ -34,7 +35,7 @@ class QuakeProvider: NSObject, ObservableObject {
 extension QuakeProvider: NSFetchedResultsControllerDelegate {
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let quakes = controller.fetchedObjects as? [QuakeItem] else {
-            assert(true, "bad fetched object")
+            assertionFailure("bad fetched object")
             return
         }
         

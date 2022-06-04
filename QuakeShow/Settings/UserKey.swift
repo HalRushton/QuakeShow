@@ -11,4 +11,8 @@ enum UserKey {
     enum Bool: String {
         case hasSetupDatabase
     }
+    
+    enum Date: Int64 {
+        case last
+    }
 }

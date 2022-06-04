@@ -17,14 +17,32 @@ struct DeveloperSettingsView: View {
     
     var body: some View {
         clearAllDataView.padding()
-        loadDataView.padding()
+        loadSmallDataView.padding()
+        loadMedDataView.padding()
+        loadLargeDataView.padding()
     }
     
-    var loadDataView: some View {
+    var loadSmallDataView: some View {
         Button(action: {
-            DataImporter.importData()
+            DataImporter.importData("quakedata")
         }, label: {
-            Text("Load initial data")
+            Text("Load small data set")
+        })
+    }
+    
+    var loadMedDataView: some View {
+        Button(action: {
+            DataImporter.importData("medata")
+        }, label: {
+            Text("Load medium data set")
+        })
+    }
+    
+    var loadLargeDataView: some View {
+        Button(action: {
+            DataImporter.importData("odata")
+        }, label: {
+            Text("Load 30 day set")
         })
     }
     

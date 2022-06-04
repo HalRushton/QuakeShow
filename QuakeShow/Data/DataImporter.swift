@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 struct DataImporter {
-    static func importData() {
-        guard let path = Bundle.main.path(forResource: "quakedata", ofType: "json") else {
-            assert(true, "No initial data")
+    static func importData(_ filename: String) {
+        guard let path = Bundle.main.path(forResource: filename, ofType: "json") else {
+            assertionFailure("No initial data")
             return
         }
         do {
@@ -31,7 +31,7 @@ struct DataImporter {
             try context.save()
             UserDefaults.standard.set(true, forKey: UserKey.Bool.hasSetupDatabase.rawValue)
         } catch {
-            assert(true, "failed to decode initial data")
+            assertionFailure("failed to decode initial data")
         }
     }
 }
