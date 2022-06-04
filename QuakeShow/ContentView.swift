@@ -11,22 +11,25 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var searchText: String = ""
+    @State var sortType: SortViewType = .magnitude
+    @State var sortAscending: Bool = false
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \QuakeItem.title, ascending: true)],
+        sortDescriptors
+        : [NSSortDescriptor(keyPath: \QuakeItem.title, ascending: true)],
         animation: .default)
     
     private var quakes: FetchedResults<QuakeItem>
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchResults) { quake in
-                    NavigationLink {
-                        Text(quake.title ?? "none")
-                    } label: {
-                        Text(quake.title ?? "none")
-                    }
-                }
-                .onDelete(perform: deleteItems)
+                NavigationLink(destination: {
+                    QuakeListView(viewModel: QuakeListViewModel(quakePublisher: QuakeProvider.shared.quakes.eraseToAnyPublisher()))
+                }, label: {
+                    Text("Big Quakes")
+                })
+                Text("option 2")
+                Text("option 3")
             }
             .listStyle(.plain)
             .searchable(text: $searchText)
@@ -41,11 +44,12 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: {
-                        Text("sort me")
-                    }, label: {
-                        Image(systemName: "arrow.up.arrow.down")
-                    })
+                    SortView(sortViewModel: SortViewModel(sortViewType: $sortType, sortAscending: $sortAscending))
+//                    NavigationLink(destination: {
+//                        Text("sort me")
+//                    }, label: {
+//                        Image(systemName: "arrow.up.arrow.down")
+//                    })
                 }
             }
 
